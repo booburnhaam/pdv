@@ -4,14 +4,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDV - Sistema de Ponto de Venda</title>
+    <title>PDV | Ponto de Venda</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>PDV</h1>
-    <p>Sistema de Ponto de Venda</p>
 
-    <button id="btnStatus">Testar conexão com o servidor</button>
-    <p id="resultado"></p>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">P</div>
+                <div>
+                    <h2>PDV</h2>
+                    <span>Ponto de Venda</span>
+                </div>
+            </div>
+
+            <p class="menu-label">MENU PRINCIPAL</p>
+
+            <nav>
+                <button class="nav-item active" data-view="dashboard">
+                    <span>▦</span> Dashboard
+                </button>
+                <button class="nav-item" data-view="caixa">
+                    <span>▣</span> Caixa / Vendas
+                </button>
+                <button class="nav-item" data-view="produtos">
+                    <span>▤</span> Produtos
+                </button>
+                <button class="nav-item" data-view="estoque">
+                    <span>▥</span> Estoque
+                </button>
+                <button class="nav-item" data-view="historico">
+                    <span>◷</span> Histórico de vendas
+                </button>
+                <button class="nav-item" data-view="relatorios">
+                    <span>▧</span> Relatórios
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <span class="status-dot"></span>
+                Sistema conectado localmente
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div>
+                    <p class="breadcrumb">Sistema / <span id="breadcrumb">Dashboard</span></p>
+                    <h1 id="pageTitle">Dashboard</h1>
+                </div>
+
+                <div class="user-info">
+                    <div class="avatar">A</div>
+                    <div>
+                        <strong>Administrador</strong>
+                        <span>Usuário demonstrativo</span>
+                    </div>
+                </div>
+            </header>
+
+            <section id="dashboard" class="view">
+                <div class="welcome">
+                    <div>
+                        <h2>Visão geral</h2>
+                        <p>Acompanhe os principais indicadores do seu negócio.</p>
+                    </div>
+                    <span class="date-badge" id="currentDate"></span>
+                </div>
+
+                <div class="stats-grid">
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span>Vendas de hoje</span>
+                            <span class="stat-icon purple">R$</span>
+                        </div>
+                        <h3 id="totalVendas">R$ 0,00</h3>
+                        <p>Valor vendido hoje</p>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span>Quantidade de vendas</span>
+                            <span class="stat-icon blue">↗</span>
+                        </div>
+                        <h3 id="quantidadeVendas">0</h3>
+                        <p>Vendas finalizadas</p>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span>Produtos cadastrados</span>
+                            <span class="stat-icon green">▤</span>
+                        </div>
+                        <h3 id="quantidadeProdutos">0</h3>
+                        <p>Itens no catálogo</p>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span>Estoque baixo</span>
+                            <span class="stat-icon orange">!</span>
+                        </div>
+                        <h3 id="estoqueBaixo">0</h3>
+                        <p>Produtos para conferir</p>
+                    </article>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <div>
+                            <h2>Acesso rápido</h2>
+                            <p>Escolha uma funcionalidade para começar.</p>
+                        </div>
+                    </div>
+
+                    <div class="quick-actions">
+                        <button class="quick-card" data-view="caixa">
+                            <span class="quick-icon purple">▣</span>
+                            <strong>Nova venda</strong>
+                            <span>Registrar uma compra</span>
+                        </button>
+
+                        <button class="quick-card" data-view="produtos">
+                            <span class="quick-icon blue">＋</span>
+                            <strong>Cadastrar produto</strong>
+                            <span>Adicionar ao catálogo</span>
+                        </button>
+
+                        <button class="quick-card" data-view="estoque">
+                            <span class="quick-icon green">▥</span>
+                            <strong>Consultar estoque</strong>
+                            <span>Conferir quantidades</span>
+                        </button>
+
+                        <button class="quick-card" data-view="historico">
+                            <span class="quick-icon orange">◷</span>
+                            <strong>Ver vendas</strong>
+                            <span>Consultar movimentações</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="caixa" class="view hidden">
+                <div class="welcome">
+                    <div>
+                        <h2>Caixa de vendas</h2>
+                        <p>Adicione produtos ao carrinho e finalize a compra.</p>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <div>
+                            <h2>Nova venda</h2>
+                            <p>Esta tela será conectada ao banco de dados nas próximas etapas.</p>
+                        </div>
+                    </div>
+                    <p>O carrinho e a finalização da venda serão implementados na próxima etapa do PDV.</p>
+                </div>
+            </section>
+
+            <section id="produtos" class="view hidden">
+                <div class="welcome">
+                    <div>
+                        <h2>Produtos</h2>
+                        <p>Gerencie os produtos disponíveis para venda.</p>
+                    </div>
+                </div>
+                <div class="panel">
+                    <h2>Catálogo de produtos</h2>
+                    <p>O cadastro e a edição de produtos serão implementados em breve.</p>
+                </div>
+            </section>
+
+            <section id="estoque" class="view hidden">
+                <div class="welcome">
+                    <div>
+                        <h2>Estoque</h2>
+                        <p>Acompanhe a disponibilidade dos produtos.</p>
+                    </div>
+                </div>
+                <div class="panel">
+                    <h2>Controle de estoque</h2>
+                    <p>A consulta de quantidades e os alertas serão implementados nas próximas etapas.</p>
+                </div>
+            </section>
+
+            <section id="historico" class="view hidden">
+                <div class="welcome">
+                    <div>
+                        <h2>Histórico de vendas</h2>
+                        <p>Consulte as compras registradas no sistema.</p>
+                    </div>
+                </div>
+                <div class="panel">
+                    <h2>Vendas realizadas</h2>
+                    <p>O histórico será preenchido após implementarmos as vendas.</p>
+                </div>
+            </section>
+
+            <section id="relatorios" class="view hidden">
+                <div class="welcome">
+                    <div>
+                        <h2>Relatórios</h2>
+                        <p>Visualize os resultados do seu negócio.</p>
+                    </div>
+                </div>
+                <div class="panel">
+                    <h2>Relatórios de vendas</h2>
+                    <p>Os indicadores serão alimentados pelos dados reais do banco de dados.</p>
+                </div>
+            </section>
+
+            <footer class="footer">
+                PDV · Sistema de Ponto de Venda
+            </footer>
+        </main>
+    </div>
 
     <script src="js/app.js"></script>
 </body>
