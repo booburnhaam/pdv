@@ -29,7 +29,9 @@ button {
 }
 
 .layout {
+    display: flex;
     min-height: 100vh;
+    width: 100%;
 }
 
 .sidebar {
@@ -137,9 +139,12 @@ nav {
 }
 
 .main-content {
+    flex: 1;
+    min-width: 0;
     margin-left: var(--sidebar-width);
-    padding: 0 34px 24px;
+    padding: 24px 34px;
     min-height: 100vh;
+    box-sizing: border-box;
 }
 
 .topbar {
@@ -453,4 +458,233 @@ nav {
     .quick-actions {
         grid-template-columns: 1fr;
     }
+}
+
+.tela-login {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: #f3f0fa;
+}
+
+.form-login {
+    width: 100%;
+    max-width: 400px;
+    padding: 32px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.form-login h1 {
+    margin-bottom: 8px;
+    color: #6d28d9;
+}
+
+.form-login > p {
+    margin-bottom: 24px;
+    color: #666;
+}
+
+.form-login label {
+    display: block;
+    margin: 16px 0 6px;
+    font-weight: 600;
+}
+
+.form-login input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d6d3df;
+    border-radius: 8px;
+    font: inherit;
+}
+
+.form-login button {
+    width: 100%;
+    margin-top: 24px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #6d28d9;
+    color: #fff;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.form-login button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+#login-mensagem {
+    margin-top: 16px;
+    font-size: 14px;
+}
+
+
+.campos-produto {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin: 20px 0;
+}
+
+.campos-produto label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.campos-produto input,
+.campos-produto select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d6d3df;
+    border-radius: 8px;
+    font: inherit;
+    box-sizing: border-box;
+}
+
+.acoes-produto {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.acoes-produto button,
+#btn-novo-produto {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font: inherit;
+}
+
+#btn-salvar-produto,
+#btn-novo-produto {
+    background: #6d28d9;
+    color: white;
+}
+
+#btn-cancelar-produto {
+    background: #eeeaf5;
+    color: #333;
+}
+
+.tabela-produtos {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 24px;
+}
+
+.tabela-produtos table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.tabela-produtos th,
+.tabela-produtos td {
+    padding: 12px;
+    border-bottom: 1px solid #e5e1ed;
+    white-space: nowrap;
+}
+
+#mensagem-produtos {
+    margin-top: 12px;
+}
+
+@media (max-width: 700px) {
+    .campos-produto {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Ajustes responsivos para tablets e celulares */
+
+@media (max-width: 900px) {
+    .main-content {
+        padding: 20px;
+    }
+
+    .campos-produto {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        box-sizing: border-box;
+        position: relative;
+        padding: 16px;
+    }
+
+    .layout {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main-content {
+        width: 100%;
+        margin-left: 0;
+        padding: 16px;
+        min-height: auto;
+    }
+
+    .sidebar-footer {
+        margin-top: 20px;
+    }
+
+    .panel {
+        padding: 16px;
+        min-width: 0;
+    }
+
+    .panel-header {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .tabela-produtos {
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    .tabela-produtos table {
+        min-width: 700px;
+    }
+
+    .quick-actions {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+.mensagem-produtos {
+    margin: 12px 0;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.mensagem-produtos:empty {
+    display: none;
+}
+
+.mensagem-produtos.erro {
+    color: #991b1b;
+    background: #fee2e2;
+}
+
+.mensagem-produtos.sucesso {
+    color: #166534;
+    background: #dcfce7;
 }

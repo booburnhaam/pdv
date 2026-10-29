@@ -6,10 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PDV | Ponto de Venda</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
 <body>
 
-    <div class="layout">
+    <div id="tela-login" class="tela-login hidden">
+        <form id="form-login" class="form-login">
+            <h1>Controle de Estoque</h1>
+            <p>PDV — Entre com sua conta para continuar</p>
+
+            <label for="login-email">E-mail</label>
+            <input
+                type="email"
+                id="login-email"
+                placeholder="seu@email.com"
+                autocomplete="username"
+                required
+            >
+
+            <label for="login-senha">Senha</label>
+            <input
+                type="password"
+                id="login-senha"
+                placeholder="Digite sua senha"
+                autocomplete="current-password"
+                required
+            >
+
+            <button type="submit" id="btn-login">Entrar</button>
+
+            <p id="login-mensagem" role="alert"></p>
+        </form>
+    </div>
+
+    <div class="layout"  id="area-pdv">
         <aside class="sidebar">
             <div class="logo">
                 <div class="logo-icon">P</div>
@@ -39,6 +69,9 @@
                 </button>
                 <button class="nav-item" data-view="relatorios">
                     <span>▧</span> Relatórios
+                </button>
+                <button type="button" id="btn-logout">
+                    Sair da conta
                 </button>
             </nav>
 
@@ -111,39 +144,30 @@
                     </article>
                 </div>
 
-                <div class="panel">
-                    <div class="panel-header">
-                        <div>
-                            <h2>Acesso rápido</h2>
-                            <p>Escolha uma funcionalidade para começar.</p>
-                        </div>
-                    </div>
+                <div class="quick-actions">
+                    <button class="quick-card" data-view="caixa">
+                        <span class="quick-icon purple">▣</span>
+                        <strong>Nova venda</strong>
+                        <span>Registrar uma compra</span>
+                    </button>
 
-                    <div class="quick-actions">
-                        <button class="quick-card" data-view="caixa">
-                            <span class="quick-icon purple">▣</span>
-                            <strong>Nova venda</strong>
-                            <span>Registrar uma compra</span>
-                        </button>
+                    <button class="quick-card" data-view="produtos">
+                        <span class="quick-icon blue">＋</span>
+                        <strong>Cadastrar produto</strong>
+                        <span>Adicionar ao catálogo</span>
+                    </button>
 
-                        <button class="quick-card" data-view="produtos">
-                            <span class="quick-icon blue">＋</span>
-                            <strong>Cadastrar produto</strong>
-                            <span>Adicionar ao catálogo</span>
-                        </button>
+                    <button class="quick-card" data-view="estoque">
+                        <span class="quick-icon green">▥</span>
+                        <strong>Consultar estoque</strong>
+                        <span>Conferir quantidades</span>
+                    </button>
 
-                        <button class="quick-card" data-view="estoque">
-                            <span class="quick-icon green">▥</span>
-                            <strong>Consultar estoque</strong>
-                            <span>Conferir quantidades</span>
-                        </button>
-
-                        <button class="quick-card" data-view="historico">
-                            <span class="quick-icon orange">◷</span>
-                            <strong>Ver vendas</strong>
-                            <span>Consultar movimentações</span>
-                        </button>
-                    </div>
+                    <button class="quick-card" data-view="historico">
+                        <span class="quick-icon orange">◷</span>
+                        <strong>Ver vendas</strong>
+                        <span>Consultar movimentações</span>
+                    </button>
                 </div>
             </section>
 
@@ -170,12 +194,106 @@
                 <div class="welcome">
                     <div>
                         <h2>Produtos</h2>
-                        <p>Gerencie os produtos disponíveis para venda.</p>
+                        <p>Cadastre e gerencie os produtos disponíveis para venda.</p>
                     </div>
                 </div>
+
                 <div class="panel">
-                    <h2>Catálogo de produtos</h2>
-                    <p>O cadastro e a edição de produtos serão implementados em breve.</p>
+                    <div class="panel-header">
+                        <div>
+                            <h2>Catálogo de produtos</h2>
+                            <p>Cadastre e gerencie os produtos disponíveis para venda.</p>
+                        </div>
+
+                        <button type="button" id="btn-novo-produto">
+                            + Novo produto
+                        </button>
+                    </div>
+
+                    <div id="mensagem-produtos" role="status" aria-live="polite"></div>
+
+                    <div id="formulario-produto" class="hidden">
+                        <h3 id="titulo-form-produto">Cadastrar produto</h3>
+
+                        <form id="form-produto">
+                            <input type="hidden" id="produto-id">
+
+                            <div class="campos-produto">
+                                <div>
+                                    <label for="produto-nome">Nome do produto *</label>
+                                    <input type="text" id="produto-nome" maxlength="150" required>
+                                </div>
+
+                                <div>
+                                    <label for="produto-codigo">Código de barras</label>
+                                    <input type="text" id="produto-codigo" maxlength="100">
+                                </div>
+
+                                <div>
+                                    <label for="produto-categoria">Categoria</label>
+                                    <input type="text" id="produto-categoria" maxlength="100">
+                                </div>
+
+                                <div>
+                                    <label for="produto-unidade">Unidade de medida *</label>
+                                    <select id="produto-unidade" required>
+                                        <option value="unidade">Unidade (un)</option>
+                                        <option value="kg">Quilograma (kg)</option>
+                                        <option value="g">Grama (g)</option>
+                                        <option value="litro">Litro (L)</option>
+                                        <option value="ml">Mililitro (mL)</option>
+                                        <option value="pacote">Pacote (pct)</option>
+                                        <option value="par">Par</option>
+                                        <option value="caixa">Caixa (cx)</option>
+                                        <option value="duzia">Dúzia (dz)</option>
+                                        <option value="fardo">Fardo</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label for="produto-preco">Preço de venda (R$) *</label>
+                                    <input type="number" id="produto-preco" min="0" step="0.01" value="0.00" required>
+                                </div>
+
+                                <div>
+                                    <label for="produto-quantidade">Quantidade em estoque *</label>
+                                    <input type="number" id="produto-quantidade" min="0" step="0.001" value="0" required>
+                                </div>
+
+                                <div>
+                                    <label for="produto-minimo">Estoque mínimo *</label>
+                                    <input type="number" id="produto-minimo" min="0" step="0.001" value="0" required>
+                                </div>
+                            </div>
+
+                            <div class="acoes-produto">
+                                <button type="submit" id="btn-salvar-produto">Salvar produto</button>
+                                <button type="button" id="btn-cancelar-produto">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="tabela-produtos">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Código de barras</th>
+                                    <th>Categoria</th>
+                                    <th>Unidade</th>
+                                    <th>Preço</th>
+                                    <th>Quantidade</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="lista-produtos">
+                                <tr>
+                                    <td colspan="7">Os produtos serão carregados aqui.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </section>
 
@@ -223,7 +341,7 @@
             </footer>
         </main>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
